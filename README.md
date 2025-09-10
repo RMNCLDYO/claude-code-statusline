@@ -2,9 +2,9 @@
 
 Beautiful, customizable status line for Claude Code. Shows project info, git status, and model context at a glance.
 
-[![version](https://img.shields.io/npm/v/claude-code-status-line.svg?label=version&color=brightgreen)](https://www.npmjs.com/package/claude-code-status-line)
-[![downloads](https://img.shields.io/npm/dm/claude-code-status-line.svg?label=downloads&color=blue)](https://www.npmjs.com/package/claude-code-status-line)
-[![package size](https://img.shields.io/npm/unpacked-size/claude-code-status-line?label=package%20size&color=yellow)](https://www.npmjs.com/package/claude-code-status-line)
+[![version](https://img.shields.io/npm/v/create-claude-statusline.svg?label=version&color=brightgreen)](https://www.npmjs.com/package/create-claude-statusline)
+[![downloads](https://img.shields.io/npm/dm/create-claude-statusline.svg?label=downloads&color=blue)](https://www.npmjs.com/package/create-claude-statusline)
+[![package size](https://img.shields.io/npm/unpacked-size/create-claude-statusline?label=package%20size&color=yellow)](https://www.npmjs.com/package/create-claude-statusline)
 [![license](https://img.shields.io/badge/license-MIT-red.svg)](https://opensource.org/licenses/MIT)
 
 ## What is this?
@@ -20,7 +20,7 @@ A lightweight status line for Claude Code that displays contextual information a
 ## Quick Start
 
 ```bash
-npx claude-code-status-line
+npx create-claude-statusline
 ```
 
 *Adds status line config files to your project. ZERO dependencies in your project.*
@@ -38,7 +38,7 @@ The installation adds these files to your project:
     └── statusline-detect.cjs    # Framework detection
 ```
 
-**Safety:** If you already have a `.claude` directory, it will be backed up to `.claude-code-status-line-backup-[timestamp]` before installation. Your existing configuration is never lost.
+**Safety:** If you already have a `.claude` directory, it will be backed up to `.create-claude-statusline-backup-[timestamp]` before installation. Your existing configuration is never lost.
 
 ## Installation Safety
 
@@ -53,17 +53,17 @@ The installation adds these files to your project:
 ### Via Package Managers
 
 ```bash
-npm install -g claude-code-status-line    # Install globally
-npx claude-code-status-line               # Run directly
-pnpm dlx claude-code-status-line          # pnpm
-bunx claude-code-status-line              # bun
+npm install -g create-claude-statusline    # Install globally
+npx create-claude-statusline               # Run directly
+pnpm dlx create-claude-statusline          # pnpm
+bunx create-claude-statusline              # bun
 ```
 
 ### Flags
 
 ```bash
-npx claude-code-status-line --dry-run     # Preview what will be installed
-npx claude-code-status-line --help        # Show all options
+npx create-claude-statusline --dry-run     # Preview what will be installed
+npx create-claude-statusline --help        # Show all options
 ```
 
 ### Shortcuts
@@ -71,8 +71,8 @@ npx claude-code-status-line --help        # Show all options
 Once installed globally:
 
 ```bash
-claude-code-status-line                   # Full command
-ccsl                                       # Short alias (Claude Code Status Line)
+create-claude-statusline                   # Full command
+ccs                                        # Short alias (Create Claude Statusline)
 ```
 
 ## What it looks like
@@ -135,11 +135,11 @@ The status line is fully customizable. After installation, you can modify the sc
 ### As a Library
 
 ```bash
-npm install claude-code-status-line
+npm install create-claude-statusline
 ```
 
 ```javascript
-import { init } from 'claude-code-status-line';
+import { init } from 'create-claude-statusline';
 
 // Initialize status line in a project
 const result = await init('/path/to/project', {
@@ -238,17 +238,17 @@ To restore your previous configuration from backup:
 
 ```bash
 # List available backups
-ls -la .claude-code-status-line-backup-*
+ls -la .create-claude-statusline-backup-*
 
 # Restore from a backup (replace timestamp with actual)
 rm -rf .claude
-mv .claude-code-status-line-backup-[timestamp] .claude
+mv .create-claude-statusline-backup-[timestamp] .claude
 ```
 
 To clean up all backup directories:
 
 ```bash
-rm -rf .claude-code-status-line-backup-*
+rm -rf .create-claude-statusline-backup-*
 ```
 
 ## FAQ
@@ -263,7 +263,7 @@ A: Yes! All scripts in `.claude/scripts/` can be modified to suit your needs.
 A: Yes, each run creates a new timestamped backup of your existing configuration.
 
 **Q: Where are backups stored?**
-A: Backups are stored in your project directory as `.claude-code-status-line-backup-[timestamp]`.
+A: Backups are stored in your project directory as `.create-claude-statusline-backup-[timestamp]`.
 
 **Q: What if the installation fails?**
 A: The installer uses transactions with automatic rollback. If anything fails, your original configuration is restored.
@@ -290,8 +290,8 @@ All participants are expected to follow our [Code of Conduct](CODE_OF_CONDUCT.md
 
 ## Support
 
-- **Issues**: [GitHub Issues](https://github.com/RMNCLDYO/claude-code-status-line/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/RMNCLDYO/claude-code-status-line/discussions)
+- **Issues**: [GitHub Issues](https://github.com/RMNCLDYO/create-claude-statusline/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/RMNCLDYO/create-claude-statusline/discussions)
 
 ## License
 
