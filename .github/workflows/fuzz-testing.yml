@@ -48,6 +48,7 @@ jobs:
 
     - name: Create fuzz test
       run: |
+        mkdir -p test
         cat << 'EOF' > test/fuzz.test.js
         const fc = require('fast-check');
         const fs = require('fs');

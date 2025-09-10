@@ -97,6 +97,7 @@ jobs:
 
     - name: Run basic robustness tests
       run: |
+        mkdir -p test
         cat << 'EOF' > robustness.test.mjs
         import { test } from 'node:test';
         import { strict as assert } from 'node:assert';
