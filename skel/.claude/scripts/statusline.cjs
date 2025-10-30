@@ -1,5 +1,5 @@
-const { readFileSync } = require('node:fs');
-const { basename } = require('node:path');
+const { readFileSync, statSync } = require('node:fs');
+const { basename, dirname, join } = require('node:path');
 const { getGitInfo } = require('./statusline-git.cjs');
 const { detectFramework, detectRuntime } = require('./statusline-detect.cjs');
 const CONFIG = require('./statusline-config.cjs');
@@ -8,6 +8,29 @@ function sanitizePath(path) {
   if (!path || path.includes('..') || path.length > 1000) return null;
   if (!/^[a-zA-Z0-9/_.-]+$/.test(path)) return null;
   return path;
+}
+
+function getProjectName(currentDir) {
+  try {
+    const gitPath = join(currentDir, '.git');
+    const stat = statSync(gitPath);
+
+    // If .git is a file, we're in a worktree
+    if (stat.isFile()) {
+      const gitContent = readFileSync(gitPath, 'utf-8').trim();
+
+      // Check if it's a bare worktree (contains /.bare/ or ends with .git/worktrees/)
+      if (gitContent.includes('/.bare/') || /\.git\/worktrees\//.test(gitContent)) {
+        // Use parent directory name for bare worktrees
+        return basename(dirname(currentDir));
+      }
+    }
+  } catch {
+    // .git doesn't exist or isn't readable, fall through to default
+  }
+
+  // Default: use current directory name
+  return basename(currentDir);
 }
 
 function validateStatusInput(input) {
@@ -140,7 +163,7 @@ function buildStatus(input) {
 
   if (!currentDir) return buildNoWorkspaceStatus(modelName);
 
-  const project = basename(currentDir);
+  const project = getProjectName(currentDir);
   const needsGitInfo = FEATURES.SHOW_GIT_BRANCH || FEATURES.SHOW_GIT_AHEAD || FEATURES.SHOW_GIT_BEHIND || FEATURES.SHOW_GIT_STAGED || FEATURES.SHOW_GIT_MODIFIED || FEATURES.SHOW_GIT_UNTRACKED;
   const git = needsGitInfo ? getCachedGitInfo(currentDir) : null;
   const framework = FEATURES.SHOW_FRAMEWORK ? detectFramework(currentDir) : null;
